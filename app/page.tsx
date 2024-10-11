@@ -9,8 +9,8 @@ export default function Home() {
       }}
     >
       <div style={{ maxWidth: 720, flex: 1 }}>
-        <p style={{ fontSize: 40 }}>서유님 돌아와요 ㅠㅠ</p>
-        <p style={{ fontSize: 40 }}>분위기 메이커가 사라졌다</p>
+        <p style={{ fontSize: 40 }}>주누의 새로운 블로그</p>
+        <p style={{ fontSize: 40 }}>언제 다 만들지</p>
       </div>
     </div>
   );
