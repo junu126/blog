@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "arcanis.vscode-zipfs",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "miku3920.vscode-render-special-chars"
+  ]
+}
