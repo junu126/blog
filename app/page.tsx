@@ -1,5 +1,6 @@
-import { getPosts } from "@/lib/post";
 import { Fragment } from "react";
+
+import { getPosts } from "@/lib/post";
 
 export default async function Home() {
   const posts = await getPosts();

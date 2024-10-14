@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -10,6 +11,7 @@ const pretendard = localFont({
   variable: "--font-pretendard",
 });
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
   title: "junukim.dev",
   description: "...",

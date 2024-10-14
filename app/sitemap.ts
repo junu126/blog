@@ -29,13 +29,13 @@ const ETC_SITE_MAP: MetadataRoute.Sitemap[number] = {
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const articleSiteMap: MetadataRoute.Sitemap = [].map((_it) => ({
+  const articleSiteMap: MetadataRoute.Sitemap = [].map(() => ({
     ...ARTICLE_SITE_MAP,
     url: `https://junukim.dev/articles/${0}`, // FIXME: url 포함시키기
     lastModified: new Date(), // FIXME: 포스팅 날짜 포함시키기
   }));
 
-  const etcSiteMap: MetadataRoute.Sitemap = [].map((_it) => ({
+  const etcSiteMap: MetadataRoute.Sitemap = [].map(() => ({
     ...ETC_SITE_MAP,
     url: `https://junukim.dev/etc/${0}`, // FIXME: url 포함시키기
     lastModified: new Date(), // FIXME: 포스팅 날짜 포함시키기

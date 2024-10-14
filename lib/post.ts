@@ -46,10 +46,16 @@ interface PostMatter {
   description: string;
 }
 
-function isPostMatter(data: { [key: string]: any }): data is PostMatter {
+function isPostMatter(data: unknown): data is PostMatter {
   return (
+    typeof data === "object" &&
+    data !== null &&
+    "title" in data &&
+    "modifiedAt" in data &&
+    "description" in data &&
     typeof data.title === "string" &&
-    isValidDate(data.modifiedAt) &&
+    typeof data.modifiedAt === "string" &&
+    isValidDate(new Date(data.modifiedAt)) &&
     typeof data.description === "string"
   );
 }
