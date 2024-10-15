@@ -54,8 +54,7 @@ function isPostMatter(data: unknown): data is PostMatter {
     "modifiedAt" in data &&
     "description" in data &&
     typeof data.title === "string" &&
-    typeof data.modifiedAt === "string" &&
-    isValidDate(new Date(data.modifiedAt)) &&
+    isValidDate(data.modifiedAt) &&
     typeof data.description === "string"
   );
 }
