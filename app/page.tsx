@@ -17,12 +17,77 @@ export default async function Home() {
       }}
     >
       <div style={{ maxWidth: 720, flex: 1 }}>
-        <p style={{ fontSize: 40 }}>주누의 새로운 블로그</p>
         <p style={{ fontSize: 40 }}>언제 다 만들지</p>
       </div>
       <div className="flex flex-col gap-2">
         {posts.map((post) => (
           <Fragment key={post.title}>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
+            <p>
+              <span>{post.title}</span>
+            </p>
             <p>
               <span>{post.title}</span>
             </p>
