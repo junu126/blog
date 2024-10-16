@@ -15,11 +15,8 @@ export default function BaseTemplate({ children }: Props) {
       >
         {children}
       </div>
-      <nav
-        style={{ zIndex: 1, height: 120 }}
-        className="fixed top-0 w-full p-0"
-      >
-        <div style={{ zIndex: 2, height: 48 }} className="relative">
+      <nav style={{ height: 120 }} className="z-1 fixed top-0 w-full p-0">
+        <div style={{ height: 48 }} className="z-2 relative">
           <div
             style={{ padding: "0px 24px" }}
             className="h-full w-full flex gap-2"
@@ -29,7 +26,9 @@ export default function BaseTemplate({ children }: Props) {
             <button>버튼3</button>
           </div>
         </div>
-        <Cloud style={{ zIndex: 1 }} className="absolute bottom-0" />
+        <div className="z-1 absolute bottom-0 w-full h-full">
+          <Cloud />
+        </div>
       </nav>
     </div>
   );
