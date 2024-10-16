@@ -8,13 +8,19 @@ interface Props {
 
 export default function BaseTemplate({ children }: Props) {
   return (
-    <div className="flex flex-col items-center justify-start h-screen">
-      <div
-        style={{ padding: "120px 16px 0px" }}
-        className="flex flex-col items-center justify-between max-w-3xl h-screen"
+    <div className="flex flex-col items-center justify-start">
+      <main
+        style={{ maxWidth: 720, padding: "120px 16px 0px" }}
+        className="flex flex-col items-center justify-between h-screen w-full"
       >
         {children}
-      </div>
+        <footer
+          style={{ padding: "48px 0px 64px 0px" }}
+          className="w-full flex flex-col"
+        >
+          <span>footer</span>
+        </footer>
+      </main>
       <nav style={{ height: 120 }} className="z-1 fixed top-0 w-full p-0">
         <div style={{ height: 48 }} className="z-2 relative">
           <div
