@@ -1,4 +1,4 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 
 // TODO: PWA 구축하기
 export default function manifest(): MetadataRoute.Manifest {

@@ -1,4 +1,4 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 
 const ROOT_SITE_MAP: MetadataRoute.Sitemap[number] = {
   url: "https://junukim.dev",

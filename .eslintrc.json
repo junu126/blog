@@ -17,6 +17,7 @@
     "prefer-const": "warn",
     "curly": ["error", "all"],
     "eqeqeq": "warn",
+    "@typescript-eslint/consistent-type-imports": "warn",
     "react/display-name": "off",
     "react/jsx-boolean": "off",
     "react/jsx-curly-brace-presence": "error",

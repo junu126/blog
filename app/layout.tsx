@@ -1,7 +1,8 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+
 import "./globals.css";
 
 const pretendard = localFont({
@@ -14,7 +15,7 @@ const pretendard = localFont({
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
   title: "junukim.dev",
-  description: "...",
+  description: "Product engineer based in seoul, south korea",
 };
 
 export default function RootLayout({
