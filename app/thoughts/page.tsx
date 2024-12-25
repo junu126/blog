@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
-  title: "Thoughts | junukim.dev",
+  title: "Thoughts | junukim.me",
 };
 
 export default async function Thoughts() {

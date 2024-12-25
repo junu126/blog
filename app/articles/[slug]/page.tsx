@@ -2,18 +2,24 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { PostBody } from "@/components/post/MdxReader";
 import { formatDate } from "@/lib/date";
 import { getPost } from "@/lib/post";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const metadata: Metadata = {
-  title: "Articles | junukim.dev",
-};
-
-export default async function Post(props: {
+interface Props {
   params: Promise<{ slug: string }>;
-}) {
-  const { params } = props;
+}
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = (await params).slug;
+  const post = await getPost(slug);
+
+  return {
+    title: `Articles | ${post.title}`,
+    description: post.description,
+    keywords: [post.tag],
+  };
+}
+
+export default async function Post({ params }: Props) {
   const slug = (await params).slug;
   const post = await getPost(slug);
 

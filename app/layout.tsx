@@ -15,7 +15,7 @@ const pretendard = localFont({
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
-  title: "junukim.dev",
+  title: "junukim.me",
   description: "Product engineer based in seoul, south korea",
 };
 

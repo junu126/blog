@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "https://junukim.dev/sitemap.xml",
+    sitemap: "https://junukim.me/sitemap.xml",
   };
 }

@@ -18,7 +18,7 @@ export default async function Home() {
       }}
     >
       <PageHeader
-        title="Junukim.dev"
+        title="Junukim.me"
         description={
           <>
             "There is no magic to achievement. It's really about hard work,

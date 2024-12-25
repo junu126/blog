@@ -4,10 +4,20 @@ import { formatDate } from "@/lib/date";
 import { getPost } from "@/lib/post";
 import type { Metadata } from "next";
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const metadata: Metadata = {
-  title: "Thoughts | junukim.dev",
-};
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = (await params).slug;
+  const post = await getPost(slug);
+
+  return {
+    title: `Thoughts | ${post.title}`,
+    description: post.description,
+    keywords: [post.tag],
+  };
+}
 
 export default async function Post(props: {
   params: Promise<{ slug: string }>;
