@@ -12,7 +12,7 @@ export default function NotFound() {
           요청하신 페이지를 찾을 수 없습니다.
         </Text>
       </Box>
-      <Divider opacity={1} bg="rgb(235, 235, 235)" />
+      <Divider />
       <InternalLink fontSize={14} href="/" width="fit-content">
         처음으로 돌아가기 {">"}
       </InternalLink>
