@@ -8,8 +8,8 @@ const ROOT_SITE_MAP: MetadataRoute.Sitemap[number] = {
   priority: 0.5,
 };
 
-const CV_SITE_MAP: MetadataRoute.Sitemap[number] = {
-  url: "https://junukim.me/cv",
+const RESUME_SITE_MAP: MetadataRoute.Sitemap[number] = {
+  url: "https://junukim.me/resume",
   lastModified: new Date(),
   changeFrequency: "daily",
   priority: 1,
@@ -40,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: post.modifiedAt,
     }));
 
-  const etcSiteMap: MetadataRoute.Sitemap = posts
+  const thoughtsSiteMap: MetadataRoute.Sitemap = posts
     .filter((post) => post.tag !== "articles")
     .map((post) => ({
       ...THOUGHTS_SITE_MAP,
@@ -50,10 +50,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ROOT_SITE_MAP,
-    CV_SITE_MAP,
+    RESUME_SITE_MAP,
     ARTICLE_SITE_MAP,
     ...articleSiteMap,
     THOUGHTS_SITE_MAP,
-    ...etcSiteMap,
+    ...thoughtsSiteMap,
   ];
 }
