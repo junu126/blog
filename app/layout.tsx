@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
 import "./globals.css";
 import { Providers } from "./Providers";
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className={pretendard.className}>
         <Providers>{children}</Providers>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
