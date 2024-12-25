@@ -30,11 +30,21 @@ export function getPostPaths() {
 
 export async function getPosts() {
   const posts = await Promise.all(getPostPaths().map(parsePost));
-  return posts.sort(() => 1);
+  return posts.sort((a, b) => {
+    return b.modifiedAt.getTime() - a.modifiedAt.getTime();
+  });
 }
 
-export function getPost(postPath: string) {
-  return parsePost(postPath);
+export async function getPost(slug: string) {
+  const posts = await getPosts();
+
+  const post = posts.find((it) => it.slug === slug);
+
+  if (post === undefined) {
+    throw new Error(`Not found post: ${slug}`);
+  }
+
+  return post;
 }
 
 export async function parsePost(postPath: string): Promise<Post> {

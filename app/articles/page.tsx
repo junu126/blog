@@ -1,5 +1,5 @@
 import { PageHeader } from "@/components/layout/PageHeader";
-import { PostList } from "@/components/ui/PostList";
+import { PostList } from "@/components/post/PostList";
 import { getPosts } from "@/lib/post";
 import type { Metadata } from "next";
 
@@ -11,9 +11,6 @@ export const metadata: Metadata = {
 export default async function Articles() {
   const posts = await getPosts();
   const filteredPosts = posts.filter((post) => post.tag === "articles");
-  const sortedPosts = filteredPosts.sort((a, b) => {
-    return b.modifiedAt.getTime() - a.modifiedAt.getTime();
-  });
 
   return (
     <div
@@ -31,7 +28,7 @@ export default async function Articles() {
         description="유용한 지식, 인사이트를 기록합니다."
       />
       <PostList>
-        {sortedPosts.map((post) => (
+        {filteredPosts.map((post) => (
           <PostList.Item key={post.slug} post={post} />
         ))}
       </PostList>

@@ -1,13 +1,10 @@
 import { getPosts } from "@/lib/post";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Link } from "@chakra-ui/react";
-import { PostList } from "@/components/ui/PostList";
+import { PostList } from "@/components/post/PostList";
 
 export default async function Home() {
   const posts = await getPosts();
-  const sortedPosts = [...posts].sort((a, b) => {
-    return b.modifiedAt.getTime() - a.modifiedAt.getTime();
-  });
 
   return (
     <div
@@ -61,7 +58,7 @@ export default async function Home() {
         </div>
       </PageHeader>
       <PostList>
-        {sortedPosts.map((post) => (
+        {posts.map((post) => (
           <PostList.Item key={post.slug} post={post} />
         ))}
       </PostList>

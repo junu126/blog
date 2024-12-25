@@ -23,11 +23,15 @@ export function PageHeader({ title, description, children }: Props) {
   );
 }
 
-function PageHeaderText(props: { children: ReactNode; bold?: boolean }) {
-  const { children, bold } = props;
+function PageHeaderText(props: {
+  children: ReactNode;
+  size?: "default" | "small";
+  bold?: boolean;
+}) {
+  const { children, size = "default", bold } = props;
 
   return (
-    <Text fontSize={15} fontWeight={bold ? 700 : 300}>
+    <Text fontSize={size === "default" ? 15 : 13} fontWeight={bold ? 700 : 300}>
       {children}
     </Text>
   );

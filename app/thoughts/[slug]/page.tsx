@@ -1,6 +1,5 @@
 import { PageHeader } from "@/components/layout/PageHeader";
-import { PostList } from "@/components/post/PostList";
-import { getPosts } from "@/lib/post";
+import { getPost } from "@/lib/post";
 import type { Metadata } from "next";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -8,9 +7,13 @@ export const metadata: Metadata = {
   title: "Thoughts | junukim.dev",
 };
 
-export default async function Thoughts() {
-  const posts = await getPosts();
-  const filteredPosts = posts.filter((post) => post.tag !== "articles");
+export default async function Post(props: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { params } = props;
+
+  const slug = (await params).slug;
+  const post = await getPost(slug);
 
   return (
     <div
@@ -23,12 +26,12 @@ export default async function Thoughts() {
         gap: 28,
       }}
     >
-      <PageHeader title="Thoughts" description="이것 저것을 기록합니다." />
-      <PostList>
-        {filteredPosts.map((post) => (
-          <PostList.Item key={post.slug} post={post} />
-        ))}
-      </PostList>
+      <PageHeader title={post.title} description={post.description}>
+        <PageHeader.Text size="small">
+          Read time: {post.readingMinutes}분
+        </PageHeader.Text>
+      </PageHeader>
+      {post.content}
     </div>
   );
 }

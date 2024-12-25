@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-import { InternalLink } from "./InternalLink";
+import { InternalLink } from "../ui/InternalLink";
 import { Post } from "@/lib/post";
 import { formatDate } from "@/lib/date";
 
