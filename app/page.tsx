@@ -1,11 +1,13 @@
-import { Fragment } from "react";
-
 import { getPosts } from "@/lib/post";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Link } from "@chakra-ui/react";
+import { PostList } from "@/components/ui/PostList";
 
 export default async function Home() {
   const posts = await getPosts();
+  const sortedPosts = [...posts].sort((a, b) => {
+    return b.modifiedAt.getTime() - a.modifiedAt.getTime();
+  });
 
   return (
     <div
@@ -15,7 +17,7 @@ export default async function Home() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        gap: 40,
+        gap: 28,
       }}
     >
       <PageHeader
@@ -58,81 +60,11 @@ export default async function Home() {
           </PageHeader.Text>
         </div>
       </PageHeader>
-      <div className="flex flex-col gap-2 w-full">
-        {posts.map((post) => (
-          <Fragment key={post.title}>
-            <p>
-              <span>{post.modifiedAt}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-            <p>
-              <span>{post.title}</span>
-            </p>
-          </Fragment>
+      <PostList>
+        {sortedPosts.map((post) => (
+          <PostList.Item key={post.slug} post={post} />
         ))}
-      </div>
+      </PostList>
     </div>
   );
 }
