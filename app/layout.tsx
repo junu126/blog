@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 import { Providers } from "./Providers";
@@ -28,6 +29,7 @@ export default function RootLayout({
     <html lang="ko" className={`${pretendard.variable}`}>
       <body className={pretendard.className}>
         <Providers>{children}</Providers>
+        <SpeedInsights />
       </body>
     </html>
   );
