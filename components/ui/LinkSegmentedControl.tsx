@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Box, Button, Text } from "@chakra-ui/react";
 import Link from "next/link";
+import { JSX } from "react";
 
 interface Item {
   id: string;

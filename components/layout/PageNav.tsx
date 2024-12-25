@@ -16,7 +16,13 @@ const NAVIGATION_ITEMS = [
 
 export function PageNav(props: HTMLAttributes<HTMLElement>) {
   const pathname = usePathname();
-  const activeControl = NAVIGATION_ITEMS.find((item) => item.href === pathname);
+  const activeControl = NAVIGATION_ITEMS.find((item) => {
+    if (item.href === "/") {
+      return pathname === "/";
+    }
+
+    return pathname.includes(item.href);
+  });
 
   return (
     <Box as="nav" h="120px" className="z-1 fixed top-0 w-full p-0" {...props}>
