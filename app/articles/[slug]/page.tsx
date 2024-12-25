@@ -2,7 +2,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { PostBody } from "@/components/post/MdxReader";
 import { formatDate } from "@/lib/date";
 import { getPost } from "@/lib/post";
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 
 interface Props {
   params: Promise<{ slug: string }>;

@@ -1,6 +1,4 @@
 import { PageHeader } from "@/components/layout/PageHeader";
-import { PostList } from "@/components/post/PostList";
-import { getPosts } from "@/lib/post";
 import { Link } from "@chakra-ui/react";
 import type { Metadata } from "next";
 
@@ -9,9 +7,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Resume() {
-  const posts = await getPosts();
-  const filteredPosts = posts.filter((post) => post.tag !== "articles");
-
   return (
     <div
       className="w-full"

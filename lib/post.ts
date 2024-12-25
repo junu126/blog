@@ -6,8 +6,6 @@ import readingTime from "reading-time";
 import { sync } from "glob";
 import { isValid as isValidDate } from "date-fns/isValid";
 
-import { formatDate } from "./date";
-
 const BASE_PATH = "/data";
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
 

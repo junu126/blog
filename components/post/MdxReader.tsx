@@ -32,10 +32,7 @@ export const PostBody = ({ content }: Props) => {
             ],
             rehypePlugins: [
               // pretty code block
-              [
-                // @ts-ignore
-                rehypePrettyCode,
-              ],
+              [rehypePrettyCode],
               // toc id를 추가하고 제목을 연결
               rehypeSlug,
             ],
