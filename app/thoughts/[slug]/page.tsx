@@ -1,4 +1,5 @@
 import { PageHeader } from "@/components/layout/PageHeader";
+import { PostBody } from "@/components/post/MdxReader";
 import { getPost } from "@/lib/post";
 import type { Metadata } from "next";
 
@@ -31,7 +32,7 @@ export default async function Post(props: {
           Read time: {post.readingMinutes}분
         </PageHeader.Text>
       </PageHeader>
-      {post.content}
+      <PostBody content={post.content} />
     </div>
   );
 }

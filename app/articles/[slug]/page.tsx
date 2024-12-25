@@ -1,4 +1,5 @@
 import { PageHeader } from "@/components/layout/PageHeader";
+import { PostBody } from "@/components/post/MdxReader";
 import { getPost } from "@/lib/post";
 import type { Metadata } from "next";
 
@@ -16,22 +17,13 @@ export default async function Post(props: {
   const post = await getPost(slug);
 
   return (
-    <div
-      className="w-full"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 28,
-      }}
-    >
+    <div className="w-full flex flex-col justify-center" style={{ gap: 28 }}>
       <PageHeader title={post.title} description={post.description}>
         <PageHeader.Text size="small">
           Read time: {post.readingMinutes}분
         </PageHeader.Text>
       </PageHeader>
-      {post.content}
+      <PostBody content={post.content} />
     </div>
   );
 }
