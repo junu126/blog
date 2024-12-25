@@ -1,11 +1,17 @@
 import { PageHeader } from "@/components/layout/PageHeader";
 import { PostBody } from "@/components/post/MdxReader";
 import { formatDate } from "@/lib/date";
-import { getPost } from "@/lib/post";
+import { getPost, getPosts } from "@/lib/post";
 import type { Metadata } from "next";
 
 interface Props {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  const filteredPosts = posts.filter((post) => post.tag === "articles");
+  return filteredPosts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

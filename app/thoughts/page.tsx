@@ -3,15 +3,14 @@ import { PostList } from "@/components/post/PostList";
 import { getPosts } from "@/lib/post";
 import type { Metadata } from "next";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
   title: "Thoughts | junukim.me",
 };
 
-export default async function Thoughts() {
-  const posts = await getPosts();
-  const filteredPosts = posts.filter((post) => post.tag !== "articles");
+const posts = await getPosts();
+const filteredPosts = posts.filter((post) => post.tag !== "articles");
 
+export default function Thoughts() {
   return (
     <div
       className="w-full"

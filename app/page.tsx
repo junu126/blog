@@ -3,9 +3,9 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Link } from "@chakra-ui/react";
 import { PostList } from "@/components/post/PostList";
 
-export default async function Home() {
-  const posts = await getPosts();
+const posts = await getPosts();
 
+export default function Home() {
   return (
     <div
       className="w-full"
