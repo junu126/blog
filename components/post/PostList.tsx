@@ -1,9 +1,10 @@
 import { Box, Text } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
+
+import type { Post } from "@/lib/post";
+import { formatDate } from "@/lib/date";
 
 import { InternalLink } from "../ui/InternalLink";
-import { Post } from "@/lib/post";
-import { formatDate } from "@/lib/date";
 
 PostList.Item = PostListItem;
 export function PostList(props: { children: ReactNode }) {
@@ -26,10 +27,15 @@ function PostListItem(props: { post: Post }) {
       _active={{ transform: "scale(0.99)" }}
     >
       <Box className="flex size-full justify-between items-center gap-4">
-        <Text fontSize={13} fontWeight={400} lineHeight="24px">
+        <Text
+          noOfLines={[2, 1]}
+          fontSize={13}
+          fontWeight={400}
+          lineHeight="24px"
+        >
           {post.title}
         </Text>
-        <Text as="span" fontSize={10} fontWeight={300}>
+        <Text as="span" fontSize={10} fontWeight={300} minWidth={58}>
           {formatDate(post.modifiedAt, "yyyy. MM. dd")}
         </Text>
       </Box>
