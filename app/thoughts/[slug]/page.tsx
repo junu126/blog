@@ -1,8 +1,9 @@
+import type { Metadata } from "next";
+
 import { PageHeader } from "@/components/layout/PageHeader";
 import { PostBody } from "@/components/post/MdxReader";
 import { formatDate } from "@/lib/date";
 import { getPost, getPosts } from "@/lib/post";
-import type { Metadata } from "next";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPost(slug);
 
   return {
-    title: `Thoughts | ${post.title}`,
+    title: post.title,
     description: post.description,
     keywords: [post.tag],
   };
