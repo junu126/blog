@@ -6,6 +6,8 @@ import readingTime from "reading-time";
 import { sync } from "glob";
 import { isValid as isValidDate } from "date-fns/isValid";
 
+import { isDev } from "@/utils/isDev";
+
 const BASE_PATH = "/data";
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
 
@@ -20,6 +22,7 @@ interface PostMatter {
   title: string;
   modifiedAt: Date;
   description: string;
+  isDraft?: boolean;
 }
 
 export function getPostPaths() {
@@ -28,9 +31,15 @@ export function getPostPaths() {
 
 export async function getPosts() {
   const posts = await Promise.all(getPostPaths().map(parsePost));
-  return posts.sort((a, b) => {
-    return b.modifiedAt.getTime() - a.modifiedAt.getTime();
-  });
+  return posts
+    .filter((it) => {
+      if (isDev()) {
+        return true;
+      }
+
+      return !(it.isDraft === true);
+    })
+    .sort((a, b) => b.modifiedAt.getTime() - a.modifiedAt.getTime());
 }
 
 export async function getPost(slug: string) {
@@ -60,6 +69,7 @@ export async function parsePost(postPath: string): Promise<Post> {
 
   return {
     ...postMatter,
+    title: postMatter.isDraft ? `${postMatter.title} (초안)` : postMatter.title,
     tag,
     content,
     readingMinutes: Math.ceil(readingTime(content).minutes),
