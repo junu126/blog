@@ -21,6 +21,7 @@ interface PostMatter {
   slug: string;
   title: string;
   modifiedAt: Date;
+  createdAt?: Date;
   description: string;
   isDraft?: boolean;
 }

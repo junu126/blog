@@ -34,7 +34,9 @@ export default async function Post({ params }: Props) {
     <div className="w-full flex flex-col justify-center" style={{ gap: 28 }}>
       <PageHeader title={post.title} description={post.description}>
         <PageHeader.Text size="small">
-          {formatDate(post.modifiedAt, "yyyy년 MM월 dd일")}
+          {post.createdAt
+            ? `작성기간: ${formatDate(post.createdAt, "yyyy. M. d")} ~ ${formatDate(post.modifiedAt, "yyyy. M. d")}`
+            : formatDate(post.modifiedAt, "yyyy년 MM월 dd일")}
           &nbsp;&nbsp;|&nbsp;&nbsp; Read time: {post.readingMinutes}분
         </PageHeader.Text>
       </PageHeader>
