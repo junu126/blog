@@ -17,6 +17,12 @@ a {
   box-sizing: border-box;
 }
 
+main:has(> [data-page="resume"]) {
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
