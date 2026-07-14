@@ -7,6 +7,7 @@ import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 
 import { A, Callout, Image } from "./mdx-ui";
+import { PostTableOfContents } from "./PostTableOfContents";
 
 interface Props {
   content: string;
@@ -14,36 +15,40 @@ interface Props {
 
 export const PostBody = ({ content }: Props) => {
   return (
-    <article
-      className="prose"
-      style={{ maxWidth: "100%", fontSize: 14, color: "rgb(78, 77, 77)" }}
-    >
-      <MDXRemote
-        source={content}
-        options={{
-          mdxOptions: {
-            remarkPlugins: [
-              // 깃허브 Flavored 마크다운 지원 추가 (version downgrade)
-              remarkGfm,
-              // 이모티콘 접근성 향상
-              remarkA11yEmoji,
-              // mdx 1줄 개행 지원
-              remarkBreaks,
-            ],
-            rehypePlugins: [
-              // pretty code block
-              [rehypePrettyCode],
-              // toc id를 추가하고 제목을 연결
-              rehypeSlug,
-            ],
-          },
-        }}
-        components={{
-          a: A,
-          img: Image,
-          blockquote: Callout,
-        }}
-      />
-    </article>
+    <>
+      <PostTableOfContents articleId="post-content" />
+      <article
+        id="post-content"
+        className="prose"
+        style={{ maxWidth: "100%", fontSize: 14, color: "rgb(78, 77, 77)" }}
+      >
+        <MDXRemote
+          source={content}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [
+                // 깃허브 Flavored 마크다운 지원 추가 (version downgrade)
+                remarkGfm,
+                // 이모티콘 접근성 향상
+                remarkA11yEmoji,
+                // mdx 1줄 개행 지원
+                remarkBreaks,
+              ],
+              rehypePlugins: [
+                // pretty code block
+                [rehypePrettyCode],
+                // toc id를 추가하고 제목을 연결
+                rehypeSlug,
+              ],
+            },
+          }}
+          components={{
+            a: A,
+            img: Image,
+            blockquote: Callout,
+          }}
+        />
+      </article>
+    </>
   );
 };
