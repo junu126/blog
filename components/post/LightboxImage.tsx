@@ -36,6 +36,8 @@ export const LightboxImage = ({
   }, []);
 
   useEffect(() => {
+    // 클라이언트 포털은 hydration이 끝난 뒤에만 생성합니다.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
   }, []);
 

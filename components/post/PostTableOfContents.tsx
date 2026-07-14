@@ -74,6 +74,8 @@ export function PostTableOfContents({ articleId }: Props) {
       }))
       .filter(({ text }) => text.length > 0);
 
+    // 제목 목록은 렌더 데이터가 아니라 실제 게시물 DOM에서 수집합니다.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHeadings(nextHeadings);
 
     let frame = 0;
