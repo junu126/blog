@@ -6,7 +6,7 @@ import rehypeSlug from "rehype-slug";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 
-import { A, Callout, Image } from "./mdx-ui";
+import { A, Callout, Image, ImageWithText } from "./mdx-ui";
 import { PostTableOfContents } from "./PostTableOfContents";
 
 interface Props {
@@ -46,6 +46,7 @@ export const PostBody = ({ content }: Props) => {
             a: A,
             img: Image,
             blockquote: Callout,
+            ImageWithText,
           }}
         />
       </article>
