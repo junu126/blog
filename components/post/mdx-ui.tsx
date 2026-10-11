@@ -1,6 +1,6 @@
-import { PropsWithChildren } from "react";
+import type { ComponentProps, PropsWithChildren } from "react";
 
-import { Link, LinkProps } from "@chakra-ui/react";
+import { getImageDimensions } from "@/lib/image";
 
 import { LightboxImage } from "./LightboxImage";
 
@@ -15,12 +15,15 @@ export const Callout = (props: PropsWithChildren) => {
   );
 };
 
-export const Image = ({ src, alt }: { src: string; alt: string }) => {
+export const Image = async ({ src, alt }: { src: string; alt: string }) => {
+  const dimensions = await getImageDimensions(src);
   return (
     <>
       <LightboxImage
-        src={src}
+        src={dimensions?.src ?? src}
         alt={alt}
+        intrinsicWidth={dimensions?.width}
+        intrinsicHeight={dimensions?.height}
         className="mx-auto mb-0 mt-8"
         imageClassName="rounded-md"
       />
@@ -40,7 +43,7 @@ interface ImageWithTextProps extends PropsWithChildren {
   imagePosition?: "left" | "right";
 }
 
-export const ImageWithText = ({
+export const ImageWithText = async ({
   src,
   alt,
   width = 240,
@@ -48,6 +51,7 @@ export const ImageWithText = ({
   children,
 }: ImageWithTextProps) => {
   const isImageRight = imagePosition === "right";
+  const dimensions = await getImageDimensions(src);
 
   return (
     <div
@@ -58,9 +62,11 @@ export const ImageWithText = ({
       }`}
     >
       <LightboxImage
-        src={src}
+        src={dimensions?.src ?? src}
         alt={alt}
         width={width}
+        intrinsicWidth={dimensions?.width}
+        intrinsicHeight={dimensions?.height}
         className={`m-0 ${isImageRight ? "sm:order-2" : ""}`}
         imageClassName="rounded-md"
       />
@@ -71,15 +77,14 @@ export const ImageWithText = ({
   );
 };
 
-export const A = (props: LinkProps) => {
+export const A = ({ className = "", ...props }: ComponentProps<"a">) => {
+  const external = /^(https?:)?\/\//.test(props.href ?? "");
   return (
-    <Link
-      color="black"
-      textDecoration="underline"
-      fontWeight={700}
-      className="break-words"
-      isExternal
+    <a
       {...props}
+      className={`break-words font-bold text-black underline ${className}`}
+      target={external ? "_blank" : props.target}
+      rel={external ? "noopener noreferrer" : props.rel}
     />
   );
 };

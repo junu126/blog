@@ -72,6 +72,26 @@ export default defineConfig([
   },
   ...nextRest,
   ...nextTypeScript,
+  {
+    files: ["app/**/*.tsx"],
+    rules: {
+      "react-refresh/only-export-components": [
+        "warn",
+        {
+          allowConstantExport: true,
+          allowExportNames: [
+            "metadata",
+            "generateMetadata",
+            "generateStaticParams",
+            "viewport",
+            "size",
+            "contentType",
+            "alt",
+          ],
+        },
+      ],
+    },
+  },
   prettierRecommended,
   {
     settings: {
@@ -84,5 +104,8 @@ export default defineConfig([
     "node_modules/**",
     "next-env.d.ts",
     "coverage/**",
+    ".agents/**",
+    "playwright-report/**",
+    "test-results/**",
   ]),
 ]);

@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element -- Preserve the original lightbox and inline image presentation requested by the author. */
 
 import {
   useCallback,
@@ -14,6 +15,8 @@ interface LightboxImageProps {
   src: string;
   alt: string;
   width?: number;
+  intrinsicWidth?: number;
+  intrinsicHeight?: number;
   className?: string;
   imageClassName?: string;
 }
@@ -22,6 +25,8 @@ export const LightboxImage = ({
   src,
   alt,
   width,
+  intrinsicWidth,
+  intrinsicHeight,
   className = "",
   imageClassName = "",
 }: LightboxImageProps) => {
@@ -80,6 +85,8 @@ export const LightboxImage = ({
         <img
           src={src}
           alt={alt}
+          width={intrinsicWidth}
+          height={intrinsicHeight}
           className={`m-0 block h-auto w-full max-w-full transition duration-300 ease-out group-hover:brightness-90 group-focus-visible:outline group-focus-visible:outline-2 group-focus-visible:outline-offset-4 group-focus-visible:outline-gray-900 ${imageClassName}`}
           loading="lazy"
         />
@@ -113,6 +120,8 @@ export const LightboxImage = ({
                 <motion.img
                   src={src}
                   alt={alt}
+                  width={intrinsicWidth}
+                  height={intrinsicHeight}
                   className="max-h-[calc(100dvh-3rem)] max-w-[calc(100vw-3rem)] select-none rounded-xl object-contain shadow-2xl sm:max-h-[calc(100dvh-5rem)] sm:max-w-[calc(100vw-5rem)]"
                   initial={{ opacity: 0, scale: 0.94 }}
                   animate={{ opacity: 1, scale: 1 }}

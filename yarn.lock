@@ -32,6 +32,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@axe-core/playwright@npm:^4.13.0":
+  version: 4.13.0
+  resolution: "@axe-core/playwright@npm:4.13.0"
+  dependencies:
+    axe-core: "npm:~4.13.0"
+  peerDependencies:
+    playwright-core: ">= 1.0.0"
+  checksum: 10c0/0938f24f3955bfa11c77c326300646a4f1dcd513389320ace9985d68486a622c443b2a34cd86f6002f617a3395623ad1e99a622450830873166aaa7e0312aa68
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.10.4, @babel/code-frame@npm:^7.23.5, @babel/code-frame@npm:^7.27.1, @babel/code-frame@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/code-frame@npm:7.29.7"
@@ -1716,6 +1727,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@playwright/test@npm:^1.64.0":
+  version: 1.64.0
+  resolution: "@playwright/test@npm:1.64.0"
+  dependencies:
+    playwright: "npm:1.64.0"
+  bin:
+    playwright: cli.js
+  checksum: 10c0/96db203daa9e5aa5fcbec3f8bc92074346334980961dcc2ef6e660add5ad4647037f98f3a84ba1ec431bfb6e6368df0fd53e7dbdd427560627deef978c762f0c
+  languageName: node
+  linkType: hard
+
 "@popperjs/core@npm:^2.11.8":
   version: 2.11.8
   resolution: "@popperjs/core@npm:2.11.8"
@@ -2901,6 +2923,13 @@ __metadata:
   version: 4.10.2
   resolution: "axe-core@npm:4.10.2"
   checksum: 10c0/0e20169077de96946a547fce0df39d9aeebe0077f9d3eeff4896518b96fde857f80b98f0d4279274a7178791744dd5a54bb4f322de45b4f561ffa2586ff9a09d
+  languageName: node
+  linkType: hard
+
+"axe-core@npm:~4.13.0":
+  version: 4.13.0
+  resolution: "axe-core@npm:4.13.0"
+  checksum: 10c0/0e3be8be10eea64beddefd3007e1425424ff60c26c5f4d5f748ec48c2825356839c02ad4167fc1f03a6d84ecd82108f49fb2846ab7fe949273787391745561ca
   languageName: node
   linkType: hard
 
@@ -5267,6 +5296,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"image-size@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "image-size@npm:2.0.4"
+  bin:
+    image-size: bin/image-size.js
+  checksum: 10c0/af01b8c2b7c536df1b866fc6daaa7e58ee909cde42fcae27562612ea77181f473445bc8acf0dfb5b9e8590e966a7a1f3f0fbf4c87ec6d1d4d60d68d87d529d76
+  languageName: node
+  linkType: hard
+
 "import-fresh@npm:^3.2.1":
   version: 3.3.0
   resolution: "import-fresh@npm:3.3.0"
@@ -6384,11 +6422,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "junwoo-blog@workspace:."
   dependencies:
+    "@axe-core/playwright": "npm:^4.13.0"
     "@chakra-ui/next-js": "npm:^2.4.2"
     "@chakra-ui/react": "npm:2.10.10"
     "@emotion/react": "npm:11.14.0"
     "@emotion/styled": "npm:11.14.1"
     "@fec/remark-a11y-emoji": "npm:^4.0.2"
+    "@playwright/test": "npm:^1.64.0"
     "@tailwindcss/typography": "npm:0.5.20"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/jest-dom": "npm:6.9.1"
@@ -6411,10 +6451,12 @@ __metadata:
     framer-motion: "npm:11.18.2"
     glob: "npm:13.0.6"
     gray-matter: "npm:^4.0.3"
+    image-size: "npm:^2.0.4"
     jest: "npm:30.4.2"
     jest-environment-jsdom: "npm:30.4.1"
     next: "npm:16.2.10"
     next-mdx-remote: "npm:6.0.0"
+    playwright-core: "npm:1.64.0"
     postcss: "npm:8.5.19"
     prettier: "npm:3.9.5"
     prettier-plugin-tailwindcss: "npm:0.6.14"
@@ -8064,6 +8106,26 @@ __metadata:
   dependencies:
     find-up: "npm:^4.0.0"
   checksum: 10c0/c56bda7769e04907a88423feb320babaed0711af8c436ce3e56763ab1021ba107c7b0cafb11cde7529f669cfc22bffcaebffb573645cbd63842ea9fb17cd7728
+  languageName: node
+  linkType: hard
+
+"playwright-core@npm:1.64.0":
+  version: 1.64.0
+  resolution: "playwright-core@npm:1.64.0"
+  bin:
+    playwright-core: cli.js
+  checksum: 10c0/fe3237282ada99d634e4d002efd3db6aa51218f7f4f3b1bc31515d30fa6eec5ec940d425e035db2af4e2856d9cae30b7a27bd167870b3285d40bdffd399ab286
+  languageName: node
+  linkType: hard
+
+"playwright@npm:1.64.0":
+  version: 1.64.0
+  resolution: "playwright@npm:1.64.0"
+  dependencies:
+    playwright-core: "npm:1.64.0"
+  bin:
+    playwright: cli.js
+  checksum: 10c0/f1ee856c280af2ac256225a1cc5e957847f0d2c56a039c89f02e31b0c9928c44e04311923a1b315bea16e3b26e5124e7c296644ad3c05e4c0a6aaa9584009933
   languageName: node
   linkType: hard
 

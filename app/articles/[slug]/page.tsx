@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { PageHeader } from "@/components/layout/PageHeader";
 import { PostBody } from "@/components/post/MdxReader";
+import { postMetadata, postStructuredData, serializeJsonLd } from "@/lib/seo";
 import { formatDate } from "@/lib/date";
 import { getPost, getPosts } from "@/lib/post";
 
@@ -17,21 +18,23 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = (await params).slug;
-  const post = await getPost(slug);
+  const post = await getPost(slug, "articles");
 
-  return {
-    title: post.title,
-    description: post.description,
-    keywords: [post.tag],
-  };
+  return postMetadata(post);
 }
 
 export default async function Post({ params }: Props) {
   const slug = (await params).slug;
-  const post = await getPost(slug);
+  const post = await getPost(slug, "articles");
 
   return (
     <div className="w-full flex flex-col justify-center" style={{ gap: 28 }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(postStructuredData(post)),
+        }}
+      />
       <PageHeader title={post.title} description={post.description}>
         <PageHeader.Text size="small">
           {post.createdAt

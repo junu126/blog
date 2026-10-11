@@ -1,5 +1,3 @@
-import { Link } from "@chakra-ui/react";
-
 import { getPosts } from "@/lib/post";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { PostList } from "@/components/post/PostList";
@@ -43,14 +41,14 @@ export default function Home() {
           <br />
           <PageHeader.Text>
             현재&nbsp;
-            <Link
-              color="black"
-              fontWeight={700}
+            <a
+              className="intro-link"
               href="https://tossplace.com"
-              isExternal
+              target="_blank"
+              rel="noopener noreferrer"
             >
               toss place
-            </Link>
+            </a>
             에서 Frontend Developer로 일하고 있어요.
             <br />
             보다 편리하고 단순하게 만드는 것에 열광하며, 오래도록 지속 가능한
@@ -59,14 +57,14 @@ export default function Home() {
           <br />
           <PageHeader.Text>
             이전에는&nbsp;
-            <Link
-              color="black"
-              fontWeight={700}
+            <a
+              className="intro-link"
               href="https://flex.team"
-              isExternal
+              target="_blank"
+              rel="noopener noreferrer"
             >
               flex
-            </Link>
+            </a>
             에 초기 멤버로 합류해서 여러 서비스를 만들었어요.
           </PageHeader.Text>
         </div>

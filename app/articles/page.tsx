@@ -1,11 +1,15 @@
+import type { Metadata } from "next";
+
+import { pageMetadata } from "@/lib/seo";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { PostList } from "@/components/post/PostList";
 import { getPosts } from "@/lib/post";
-import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Articles | junukim.me",
-};
+export const metadata: Metadata = pageMetadata(
+  "Articles",
+  "프론트엔드 개발과 제품을 만들며 배운 지식, 구현 경험을 기록합니다.",
+  "/articles",
+);
 
 const posts = await getPosts();
 const filteredPosts = posts.filter((post) => post.tag === "articles");

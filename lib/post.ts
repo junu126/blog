@@ -1,10 +1,12 @@
 import fs from "fs";
 import path from "path";
 
+import { cache } from "react";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { sync } from "glob";
 import { isValid as isValidDate } from "date-fns/isValid";
+import { notFound } from "next/navigation";
 
 import { isDev } from "@/utils/isDev";
 
@@ -30,7 +32,7 @@ export function getPostPaths() {
   return sync(`${POSTS_PATH}/**/**/*.mdx`);
 }
 
-export async function getPosts() {
+export const getPosts = cache(async () => {
   const posts = await Promise.all(getPostPaths().map(parsePost));
   return posts
     .filter((it) => {
@@ -41,15 +43,19 @@ export async function getPosts() {
       return !(it.isDraft === true);
     })
     .sort((a, b) => b.modifiedAt.getTime() - a.modifiedAt.getTime());
-}
+});
 
-export async function getPost(slug: string) {
+export async function getPost(slug: string, section?: "articles" | "thoughts") {
   const posts = await getPosts();
 
   const post = posts.find((it) => it.slug === slug);
 
-  if (post === undefined) {
-    throw new Error(`Not found post: ${slug}`);
+  if (
+    post === undefined ||
+    (section === "articles" && post.tag !== "articles") ||
+    (section === "thoughts" && post.tag === "articles")
+  ) {
+    notFound();
   }
 
   return post;

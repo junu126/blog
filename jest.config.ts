@@ -10,6 +10,7 @@ const createJestConfig = nextJest({
 const config: Config = {
   coverageProvider: "v8",
   testEnvironment: "jsdom",
+  testPathIgnorePatterns: ["/node_modules/", "/.agents/", "/e2e/"],
 };
 
 export default createJestConfig(config);

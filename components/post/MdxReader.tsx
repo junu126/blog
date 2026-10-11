@@ -27,7 +27,7 @@ const trustedMdxOptions: NonNullable<MDXRemoteProps["options"]> = {
     ],
     rehypePlugins: [
       // pretty code block
-      [rehypePrettyCode],
+      [rehypePrettyCode, { theme: "github-dark-high-contrast" }],
       // toc id를 추가하고 제목을 연결
       rehypeSlug,
     ],
@@ -40,13 +40,26 @@ export const PostBody = ({ content }: Props) => {
       <PostTableOfContents articleId="post-content" />
       <article
         id="post-content"
-        className="prose"
+        className="prose reading-body"
         style={{ maxWidth: "100%", fontSize: 14, color: "rgb(78, 77, 77)" }}
       >
         <MDXRemote
           source={content}
           options={trustedMdxOptions}
           components={{
+            pre: (props) => (
+              <pre tabIndex={0} aria-label="코드 예제" {...props} />
+            ),
+            table: (props) => (
+              <div
+                className="table-scroll"
+                role="region"
+                aria-label="표"
+                tabIndex={0}
+              >
+                <table {...props} />
+              </div>
+            ),
             a: A,
             img: Image,
             blockquote: Callout,

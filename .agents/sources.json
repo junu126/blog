@@ -1,0 +1,32 @@
+{
+  "installedAt": "2026-10-11",
+  "scope": "repository",
+  "sources": [
+    {
+      "repository": "addyosmani/web-quality-skills",
+      "commit": "afa8da942115f2961fdbfa80807ea0b232ff6c00",
+      "skills": {
+        "web-quality-audit": "skills/web-quality-audit",
+        "seo": "skills/seo",
+        "core-web-vitals": "skills/core-web-vitals",
+        "accessibility": "skills/accessibility"
+      },
+      "additionalReference": "skills/performance/references/MEASUREMENT.md"
+    },
+    {
+      "repository": "vercel-labs/agent-skills",
+      "commit": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "skills": {
+        "web-design-guidelines": "skills/web-design-guidelines",
+        "vercel-react-best-practices": "skills/react-best-practices"
+      }
+    },
+    {
+      "repository": "pbakaus/impeccable",
+      "commit": "c63b8dd7dd5a5f3c32eaabe1af76d0694f863ed2",
+      "skills": {
+        "impeccable": ".agents/skills/impeccable"
+      }
+    }
+  ]
+}

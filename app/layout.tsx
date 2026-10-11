@@ -1,24 +1,19 @@
 import type { ReactNode } from "react";
-
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
+import { AUTHOR, pageMetadata, SITE_DESCRIPTION, SITE_URL } from "@/lib/seo";
+
 import "./globals.css";
-import { Providers } from "./Providers";
+import "./pretendard.css";
 
-const pretendard = localFont({
-  src: "../fonts/PretendardVariable.woff2",
-  display: "swap",
-  weight: "45 920",
-  variable: "--font-pretendard",
-});
-
-// eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
-  title: "junukim.me",
-  description: "Product engineer based in seoul, south korea",
+  ...pageMetadata("junukim.me", SITE_DESCRIPTION, "/"),
+  metadataBase: new URL(SITE_URL),
+  title: { default: "junukim.me", template: "%s | junukim.me" },
+  authors: [AUTHOR],
+  creator: AUTHOR.name,
 };
 
 export default function RootLayout({
@@ -27,11 +22,27 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${pretendard.variable}`}>
-      <body className={pretendard.className}>
-        <Providers>{children}</Providers>
-        <SpeedInsights />
-        <Analytics />
+    <html lang="ko">
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/pretendard-v1.3.9/PretendardVariable.subset.91.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <body>
+        <a className="skip-link" href="#main-content" tabIndex={0}>
+          본문으로 건너뛰기
+        </a>
+        {children}
+        {process.env.VERCEL === "1" && (
+          <>
+            <SpeedInsights />
+            <Analytics />
+          </>
+        )}
       </body>
     </html>
   );
