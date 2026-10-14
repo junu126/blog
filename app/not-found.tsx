@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "페이지를 찾을 수 없어요",
+  description: "주소를 확인하거나 처음 화면에서 글을 찾아보세요.",
+  robots: { index: false },
+  alternates: { canonical: null },
+  openGraph: null,
+  twitter: null,
+};
 
 export default function NotFound() {
   return (

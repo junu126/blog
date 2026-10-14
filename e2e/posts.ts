@@ -16,8 +16,13 @@ export const posts = globSync("data/**/*.mdx").flatMap((file) => {
       path: `/${section}/${encodeURIComponent(data.slug)}`,
       title: data.title as string,
       description: data.description as string,
-      modifiedAt: (data.modifiedAt as Date).toISOString(),
-      createdAt: (data.createdAt as Date | undefined)?.toISOString(),
+      modifiedAt:
+        (data.modifiedAt as Date).toISOString().slice(0, 10) +
+        "T00:00:00+09:00",
+      createdAt: data.createdAt
+        ? (data.createdAt as Date).toISOString().slice(0, 10) +
+          "T00:00:00+09:00"
+        : undefined,
     },
   ];
 });

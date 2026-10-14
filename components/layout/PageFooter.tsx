@@ -5,7 +5,7 @@ export function PageFooter(props: HTMLAttributes<HTMLElement>) {
     <footer className="page-footer" {...props}>
       <hr />
       <div className="page-footer-row">
-        <span>© 2024</span>
+        <span>© {new Date().getFullYear()}</span>
         <div className="page-footer-links">
           <a
             href="https://www.linkedin.com/in/%EC%A4%80%EC%9A%B0-%EA%B9%80-740320163/"

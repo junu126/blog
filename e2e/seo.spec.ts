@@ -19,14 +19,19 @@ for (const post of posts) {
       /<script type="application\/ld\+json">(.*?)<\/script>/,
     )?.[1];
     expect(json).toBeDefined();
-    const data = JSON.parse(json!);
+    const graph = JSON.parse(json!)["@graph"];
+    const data = graph.find(
+      (entity: { "@type": string }) => entity["@type"] === "BlogPosting",
+    );
     expect(data).toMatchObject({
       "@type": "BlogPosting",
       headline: post.title,
       description: post.description,
       url: `https://junukim.me${post.path}`,
       dateModified: post.modifiedAt,
-      author: { name: "김준우" },
+      author: { "@id": "https://junukim.me/#person" },
+      publisher: { "@id": "https://junukim.me/#person" },
+      image: ["https://junukim.me/opengraph-image"],
     });
     expect(data.datePublished).toBe(post.createdAt);
     expect(html).not.toContain('name="robots" content="noindex');
@@ -45,7 +50,7 @@ test("sitemap is exact, unique and stable", async ({ request }) => {
     pages.map((pathname) => `https://junukim.me${pathname}`).sort(),
   );
   expect(new Set(urls).size).toBe(pages.length);
-  expect((xml.match(/<lastmod>/g) ?? []).length).toBe(posts.length);
+  expect((xml.match(/<lastmod>/g) ?? []).length).toBe(posts.length + 3);
   const robots = await request.get("/robots.txt");
   expect(await robots.text()).toContain(
     "Sitemap: https://junukim.me/sitemap.xml",
@@ -63,6 +68,7 @@ test("social image is a successful 1200x630 PNG", async ({ request }) => {
 });
 
 for (const pathname of [
+  "/nope",
   "/articles/jeju",
   "/thoughts/fcc",
   "/articles/does-not-exist",
@@ -71,6 +77,51 @@ for (const pathname of [
   test(`${pathname}: 404 and noindex`, async ({ request }) => {
     const response = await request.get(pathname);
     expect(response.status()).toBe(404);
-    expect(await response.text()).toContain('name="robots" content="noindex"');
+    const html = await response.text();
+    expect(html).toContain('name="robots" content="noindex"');
+    expect(html).not.toContain('rel="canonical"');
+    expect(html).toContain("페이지를 찾을 수 없어요 | junukim.me</title>");
+    expect(html).not.toContain('property="og:url"');
   });
 }
+
+test("home and resume expose their own entities and readable content", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page).toHaveTitle("김준우 | 프론트엔드 개발자 블로그");
+  const home = await page
+    .locator('script[type="application/ld+json"]')
+    .textContent();
+  expect(
+    JSON.parse(home!)["@graph"].map(
+      (entity: { "@type": string }) => entity["@type"],
+    ),
+  ).toEqual(["WebSite", "Person"]);
+  await expect(page.locator('link[rel="preload"][as="font"]')).toHaveCount(1);
+  await expect(page.locator("nav li[tabindex]")).toHaveCount(0);
+  await page.goto("/resume");
+  expect(
+    (await page.locator("main article").innerText()).length,
+  ).toBeGreaterThanOrEqual(500);
+  const resume = await page
+    .locator('script[type="application/ld+json"]')
+    .textContent();
+  expect(JSON.parse(resume!)["@graph"][0]["@type"]).toBe("ProfilePage");
+});
+
+test("security headers and immutable font caching", async ({ request }) => {
+  const response = await request.get("/");
+  expect(response.headers()).toMatchObject({
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "SAMEORIGIN",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "permissions-policy": "camera=(), microphone=(), geolocation=()",
+  });
+  const font = await request.get(
+    "/fonts/pretendard-v1.3.9/PretendardVariable.subset.91.woff2",
+  );
+  expect(font.headers()["cache-control"]).toBe(
+    "public, max-age=31536000, immutable",
+  );
+});

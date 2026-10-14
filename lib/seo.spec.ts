@@ -4,6 +4,8 @@ import {
   postPath,
   postStructuredData,
   serializeJsonLd,
+  PERSON_ID,
+  WEBSITE_ID,
 } from "./seo";
 
 const post: Post = {
@@ -24,13 +26,17 @@ test("canonical routes encode slugs and respect the article section", () => {
 });
 
 test("an unknown publication date is omitted instead of fabricated", () => {
-  const data = JSON.parse(serializeJsonLd(postStructuredData(post)));
+  const data = JSON.parse(serializeJsonLd(postStructuredData(post)))[
+    "@graph"
+  ][0];
   expect(data).not.toHaveProperty("datePublished");
-  expect(data.dateModified).toBe("2025-01-03T00:00:00.000Z");
+  expect(data.dateModified).toBe("2025-01-03T00:00:00+09:00");
   const createdAt = new Date("2024-01-01T00:00:00Z");
-  expect(postStructuredData({ ...post, createdAt }).datePublished).toBe(
-    createdAt.toISOString(),
-  );
+  expect(
+    JSON.parse(serializeJsonLd(postStructuredData({ ...post, createdAt })))[
+      "@graph"
+    ][0].datePublished,
+  ).toBe("2024-01-01T00:00:00+09:00");
 });
 
 test("draft metadata blocks indexing", () => {
@@ -44,5 +50,17 @@ test("JSON-LD cannot close its script element", () => {
   const title = "</script><script>alert('unsafe')</script>";
   const serialized = serializeJsonLd(postStructuredData({ ...post, title }));
   expect(serialized).not.toContain("<");
-  expect(JSON.parse(serialized).headline).toBe(title);
+  expect(JSON.parse(serialized)["@graph"][0].headline).toBe(title);
+});
+
+test("article entities resolve to the same author, publisher and website", () => {
+  const graph = postStructuredData(post)["@graph"];
+  expect(graph[0]).toMatchObject({
+    author: { "@id": PERSON_ID },
+    publisher: { "@id": PERSON_ID },
+    isPartOf: { "@id": WEBSITE_ID },
+    image: ["https://junukim.me/opengraph-image"],
+  });
+  expect(graph[1]).toMatchObject({ "@id": PERSON_ID, "@type": "Person" });
+  expect(graph[2]).toMatchObject({ "@id": WEBSITE_ID, "@type": "WebSite" });
 });

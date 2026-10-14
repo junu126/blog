@@ -3,15 +3,19 @@ import type { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
-import { AUTHOR, pageMetadata, SITE_DESCRIPTION, SITE_URL } from "@/lib/seo";
+import { AUTHOR, SITE_DESCRIPTION, SITE_URL } from "@/lib/seo";
+import { FontPreload } from "@/components/layout/FontPreload";
 
 import "./globals.css";
 import "./pretendard.css";
 
 export const metadata: Metadata = {
-  ...pageMetadata("junukim.me", SITE_DESCRIPTION, "/"),
   metadataBase: new URL(SITE_URL),
-  title: { default: "junukim.me", template: "%s | junukim.me" },
+  title: {
+    default: "김준우 | 프론트엔드 개발자 블로그",
+    template: "%s | junukim.me",
+  },
+  description: SITE_DESCRIPTION,
   authors: [AUTHOR],
   creator: AUTHOR.name,
 };
@@ -23,16 +27,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <head>
-        <link
-          rel="preload"
-          href="/fonts/pretendard-v1.3.9/PretendardVariable.subset.91.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-      </head>
       <body>
+        <FontPreload />
         <a className="skip-link" href="#main-content" tabIndex={0}>
           본문으로 건너뛰기
         </a>

@@ -1,8 +1,21 @@
+import type { Metadata } from "next";
+
 import { getPosts } from "@/lib/post";
+import { JsonLd } from "@/lib/jsonld";
+import {
+  pageMetadata,
+  SITE_DESCRIPTION,
+  websiteStructuredData,
+} from "@/lib/seo";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { PostList } from "@/components/post/PostList";
 
 const posts = await getPosts();
+
+export const metadata: Metadata = {
+  ...pageMetadata("김준우 | 프론트엔드 개발자 블로그", SITE_DESCRIPTION, "/"),
+  title: { absolute: "김준우 | 프론트엔드 개발자 블로그" },
+};
 
 export default function Home() {
   return (
@@ -16,6 +29,7 @@ export default function Home() {
         gap: 28,
       }}
     >
+      <JsonLd data={websiteStructuredData()} />
       <PageHeader
         title="Junukim.me"
         description={

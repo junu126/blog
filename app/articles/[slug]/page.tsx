@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 
 import { PageHeader } from "@/components/layout/PageHeader";
 import { PostBody } from "@/components/post/MdxReader";
-import { postMetadata, postStructuredData, serializeJsonLd } from "@/lib/seo";
+import { postMetadata, postStructuredData } from "@/lib/seo";
+import { JsonLd } from "@/lib/jsonld";
 import { formatDate } from "@/lib/date";
 import { getPost, getPosts } from "@/lib/post";
 
@@ -29,12 +30,7 @@ export default async function Post({ params }: Props) {
 
   return (
     <div className="w-full flex flex-col justify-center" style={{ gap: 28 }}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: serializeJsonLd(postStructuredData(post)),
-        }}
-      />
+      <JsonLd data={postStructuredData(post)} />
       <PageHeader title={post.title} description={post.description}>
         <PageHeader.Text size="small">
           {post.createdAt

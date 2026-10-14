@@ -5,6 +5,7 @@ interface Item {
   href: string;
   title: string;
 }
+const MotionLink = motion.create(Link);
 export function LinkSegmentedControl({
   activeItem,
   items,
@@ -15,19 +16,17 @@ export function LinkSegmentedControl({
   return (
     <ul className="nav-links">
       {items.map((item) => (
-        <motion.li
-          key={item.id}
-          whileTap={
-            item.id === activeItem?.id ? { scale: 0.95 } : { opacity: 0.6 }
-          }
-        >
-          <Link
+        <li key={item.id}>
+          <MotionLink
             href={item.href}
             aria-current={item.id === activeItem?.id ? "page" : undefined}
+            whileTap={
+              item.id === activeItem?.id ? { scale: 0.95 } : { opacity: 0.6 }
+            }
           >
             {item.title}
-          </Link>
-        </motion.li>
+          </MotionLink>
+        </li>
       ))}
     </ul>
   );
